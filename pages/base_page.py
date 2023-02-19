@@ -25,6 +25,10 @@ class BasePage:
         basket_button.click()
         assert 'basket' in self.browser.current_url, 'basket is not a part of url'
 
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"
+
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
 
@@ -34,6 +38,13 @@ class BasePage:
         except NoSuchElementException:
             return False
         return True
+
+    def element_to_action(self, how, what):
+        try:
+            element = self.browser.find_element(how, what)
+        except NoSuchElementException:
+            return False
+        return element
 
     def is_not_element_present(self, how, what, timeout=4):
         try:
