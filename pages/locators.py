@@ -12,4 +12,5 @@ class LoginPageLocators:
 
 class ProductPageLocators:
     ADD_TO_CART_BUTTON = (By.CSS_SELECTOR, '#add_to_basket_form button')
+    SUCCESS_MESSAGE = (By.CSS_SELECTOR, '.alertinner')
 
