@@ -20,6 +20,11 @@ class BasePage:
         link.click()
         assert 'login' in self.browser.current_url, 'login is not a part of url'
 
+    def go_to_basket(self):
+        basket_button = self.browser.find_element(*BasePageLocators.BASKET_BUTTON)
+        basket_button.click()
+        assert 'basket' in self.browser.current_url, 'basket is not a part of url'
+
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
 
