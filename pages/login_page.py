@@ -1,7 +1,6 @@
 from .base_page import BasePage
 from pages.locators import LoginPageLocators
 from pages.locators import BasePageLocators
-from selenium.webdriver.common.by import By
 
 
 class LoginPage(BasePage):
@@ -22,14 +21,15 @@ class LoginPage(BasePage):
         assert self.is_element_present(*LoginPageLocators.REGISTRATION_FORM), "Registration Form is not presented"
 
     def register_new_user(self, email, password):
-        send_email = self.element_to_action(By.CSS_SELECTOR, '#id_registration-email')
+        send_email = self.element_to_action(*LoginPageLocators.REGISTRATION_EMAIL)
         send_email.send_keys(f"{email}")
-        send_password = self.element_to_action(By.CSS_SELECTOR, '#id_registration-password1')
+        send_password = self.element_to_action(*LoginPageLocators.REGISTRATION_PASSWORD)
         send_password.send_keys(f"{password}")
-        send_password_confirm = self.element_to_action(By.CSS_SELECTOR, '#id_registration-password2')
+        send_password_confirm = self.element_to_action(*LoginPageLocators.REGISTRATION_PASSWORD_CONFIRM)
         send_password_confirm.send_keys(f"{password}")
-        registration_button = self.element_to_action(By.CSS_SELECTOR, '[name = "registration_submit"]')
+        registration_button = self.element_to_action(*LoginPageLocators.REGISTRATION_BUTTON)
         registration_button.click()
-        assert self.is_element_present(By.CSS_SELECTOR, '.wicon'), 'Something wrong with the registration'
+        assert self.is_element_present(*LoginPageLocators.REGISTRATION_SUCCESS_MESSAGE),\
+            'Something wrong with the registration'
 
 
